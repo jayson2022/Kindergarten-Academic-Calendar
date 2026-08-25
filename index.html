@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">html_content = """<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>115學年度第一學期小班重要日程</title>
+    <!-- FullCalendar CSS CDN -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f7f9fc;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 24px;
+        }
+        #calendar {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        /* 自定義事件顏色 */
+        .fc-event {
+            cursor: pointer;
+            border-radius: 4px;
+            padding: 2px 4px;
+            font-size: 0.85em;
+        }
+        .event-activity {
+            background-color: #3498db !important;
+            border-color: #2980b9 !important;
+        }
+        .event-cleaning {
+            background-color: #e67e22 !important;
+            border-color: #d35400 !important;
+        }
+        .event-admin {
+            background-color: #9b59b6 !important;
+            border-color: #8e44ad !important;
+        }
+        /* 彈跳視窗樣式 */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.4); 
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modal-title {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .color-box {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>115學年度第一學期小班重要日程表</h2>
+    
+    <div class="legend">
+        <div class="legend-item"><div class="color-box" style="background-color: #3498db;"></div>大型活動/座談</div>
+        <div class="legend-item"><div class="color-box" style="background-color: #e67e22;"></div>睡袋清洗</div>
+        <div class="legend-item"><div class="color-box" style="background-color: #9b59b6;"></div>發放餐點表/園地</div>
+    </div>
+
+    <div id='calendar'></div>
+</div>
+
+<!-- 彈跳視窗 -->
+<div id="eventModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3 id="modalEventTitle" class="modal-title"></h3>
+        <p><strong>日期：</strong><span id="modalEventDate"></span></p>
+        <p><strong>週次：</strong><span id="modalEventWeek"></span></p>
+        <p><strong>類別：</strong><span id="modalEventType"></span></p>
+    </div>
+</div>
+
+<!-- FullCalendar JS CDN -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var modal = document.getElementById('eventModal');
+        var span = document.getElementsByClassName("close")[0];
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            initialDate: '2026-09-01', // 預設顯示 2026 年 9 月
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek'
+            },
+            locale: 'zh-tw',
+            events: [
+                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-08-14', extendedProps: { week: '第 2 週', type: '睡袋清洗' }, className: 'event-cleaning' },
+                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-08-28', extendedProps: { week: '第 4 週', type: '睡袋清洗' }, className: 'event-cleaning' },
+                { title: '寄發裕德園地、九月份餐點表', start: '2026-09-01', extendedProps: { week: '第 5 週', type: '行政/發信' }, className: 'event-admin' },
+                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-09-11', extendedProps: { week: '第 6 週', type: '睡袋清洗' }, className: 'event-cleaning' },
+                { title: '小、幼班家長座談會', start: '2026-09-18', extendedProps: { week: '第 7 週', type: '家長參與' }, className: 'event-activity' },
+                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-09-24', extendedProps: { week: '第 8 週', type: '睡袋清洗' }, className: 'event-cleaning' },
+                { title: '寄發裕德園地、十月份餐點表', start: '2026-10-01', extendedProps: { week: '第 9 週', type: '行政/發信' }, className: 'event-admin' },
+                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-10-08', extendedProps: { week: '第 10 週', type: '睡袋清洗' }, className: 'event-cleaning' },
+                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-10-22', extendedProps: { week: '第 11/12 週', type: '睡袋清洗' }, className: 'event-cleaning' },
+                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-11-06', extendedProps: { week: '第 14 週', type: '睡袋清洗' }, className: 'event-cleaning' },
+                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-11-20', extendedProps: { week: '第 16 週', type: '睡袋清洗' }, className: 'event-cleaning' },
+                { title: '寄發裕德園地、十二月份餐點表', start: '2026-12-01', extendedProps: { week: '第 18 週', type: '行政/發信' }, className: 'event-admin' },
+                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-12-03', extendedProps: { week: '第 18 週', type: '睡袋清洗' }, className: 'event-cleaning' },
+                { title: '愛心聖誕園遊會', start: '2026-12-18', extendedProps: { week: '第 20 週', type: '大型活動' }, className: 'event-activity' },
+                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-12-18', extendedProps: { week: '第 20 週', type: '睡袋清洗' }, className: 'event-cleaning' },
+                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-12-31', extendedProps: { week: '第 22 週', type: '睡袋清洗' }, className: 'event-cleaning' },
+                { title: '寄發裕德園地、一月份餐點表', start: '2027-01-04', extendedProps: { week: '第 23 週', type: '行政/發信' }, className: 'event-admin' },
+                { title: 'B棟幼兒睡袋帶回清洗', start: '2027-01-15', extendedProps: { week: '第 24 週', type: '睡袋清洗' }, className: 'event-cleaning' },
+                { title: '親子運動會', start: '2027-01-16', extendedProps: { week: '第 24 週', type: '大型活動' }, className: 'event-activity' }
+            ],
+            eventClick: function(info) {
+                var eventObj = info.event;
+                document.getElementById('modalEventTitle').innerText = eventObj.title;
+                document.getElementById('modalEventDate').innerText = eventObj.startStr;
+                document.getElementById('modalEventWeek').innerText = eventObj.extendedProps.week;
+                document.getElementById('modalEventType').innerText = eventObj.extendedProps.type;
+                modal.style.display = "block";
+            }
+        });
+
+        calendar.render();
+
+        // 關閉彈跳視窗
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
+"""
+
+with open('school_calendar.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
