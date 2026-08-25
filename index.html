@@ -2,197 +2,532 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>115學年度第一學期小班重要日程</title>
-    <!-- FullCalendar CSS CDN -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>115學年度第一學期 - 幼兒園智慧行程與課表</title>
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
     <style>
+        :root {
+            --bg-color: #f4f5f7;
+            --card-bg: #ffffff;
+            --text-primary: #111827;     
+            --text-secondary: #374151;   
+            --border-color: #d1d5db;     
+            --radius-large: 16px;
+            --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f7f9fc;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
             margin: 0;
-            padding: 20px;
+            padding: 12px 8px;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
         }
-        .container {
-            max-width: 900px;
+
+        .main-container {
+            max-width: 1000px;
             margin: 0 auto;
-            background: #fff;
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background: var(--card-bg);
+            padding: 16px;
+            border-radius: var(--radius-large);
+            box-shadow: var(--shadow-subtle);
         }
-        h2 {
+
+        header {
             text-align: center;
-            color: #2c3e50;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-color);
         }
-        #calendar {
-            max-width: 100%;
-            margin: 0 auto;
+
+        header h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 0 0 6px 0;
+            color: var(--text-primary);
         }
-        /* 自定義事件顏色 */
-        .fc-event {
-            cursor: pointer;
-            border-radius: 4px;
-            padding: 2px 4px;
-            font-size: 0.85em;
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin: 0;
+            background: #e5e7eb;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
         }
-        .event-activity {
-            background-color: #3498db !important;
-            border-color: #2980b9 !important;
-        }
-        .event-cleaning {
-            background-color: #e67e22 !important;
-            border-color: #d35400 !important;
-        }
-        .event-admin {
-            background-color: #9b59b6 !important;
-            border-color: #8e44ad !important;
-        }
-        /* 彈跳視窗樣式 */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1000; 
-            left: 0;
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.4); 
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; 
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .modal-title {
-            color: #2c3e50;
-            margin-top: 0;
-        }
-        .legend {
+
+        .filter-bar {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
+            gap: 8px;
+            margin-bottom: 16px;
         }
-        .legend-item {
+
+        .filter-btn {
+            background: #f3f4f6;
+            border: 2px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .filter-btn.active {
+            background: #111827;
+            color: #ffffff;
+            border-color: #111827;
+        }
+
+        .legend-bar {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .legend-tag {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            background: #f9fafb;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            border: 1px solid var(--border-color);
         }
-        .color-box {
-            width: 12px;
-            height: 12px;
-            border-radius: 3px;
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
         }
+
+        #calendar {
+            background: #ffffff;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .fc { font-family: inherit; font-size: 0.88rem; }
+        .fc-toolbar-title { font-size: 1.1rem !important; font-weight: 800 !important; color: var(--text-primary); }
+        .fc-button-primary {
+            background-color: #374151 !important;
+            border: none !important;
+            border-radius: 6px !important;
+            padding: 6px 10px !important;
+            font-size: 0.85rem !important;
+            font-weight: 700 !important;
+        }
+        .fc-daygrid-day-number { color: var(--text-primary); font-weight: 700; padding: 4px !important; }
+        .fc-day-today { background-color: #eff6ff !important; }
+
+        /* ✨ 關鍵修正：允許事件文字自動換行，徹底解決手機吃字問題 */
+        .fc-event {
+            border: none !important;
+            border-radius: 6px !important;
+            padding: 4px 6px !important;
+            font-size: 0.75rem !important;
+            font-weight: 700 !important;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+            white-space: normal !important; /* 允許文字正常換行 */
+            word-break: break-all;         /* 避免長單字卡住，強制適應寬度 */
+        }
+
+        .fc-event-title {
+            color: #ffffff !important; 
+            font-weight: 700 !important;
+            white-space: normal !important;
+            overflow: visible !important;
+        }
+
+        .event-activity { background-color: #1d4ed8 !important; } /* 深藍色 + 白字 */
+        .event-cleaning { background-color: #c2410c !important; } /* 深橘紅 + 白字 */
+        .event-admin    { background-color: #6d28d9 !important; } /* 深紫色 + 白字 */
+        .event-safety   { background-color: #047857 !important; } /* 深綠色 + 白字 */
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin: 24px 0 12px 0;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-top: 2px solid var(--border-color);
+            padding-top: 18px;
+        }
+
+        .teacher-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .teacher-grid { grid-template-columns: repeat(5, 1fr); }
+            .main-container { padding: 24px; }
+            header h1 { font-size: 1.6rem; }
+        }
+
+        .teacher-card {
+            background: #f9fafb;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .teacher-card h4 {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #1d4ed8;
+            margin: 0 0 2px 0;
+        }
+
+        .teacher-card p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .timetable-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            min-width: 580px;
+            background: #ffffff;
+        }
+
+        .timetable th, .timetable td {
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            text-align: center;
+        }
+
+        .timetable th {
+            background-color: #e5e7eb;
+            color: var(--text-primary);
+            font-weight: 800;
+        }
+
+        .timetable td:first-child {
+            font-weight: 700;
+            color: var(--text-secondary);
+            background-color: #f3f4f6;
+            white-space: nowrap;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            align-items: center; justify-content: center;
+            padding: 16px;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            width: 100%; max-width: 340px;
+            padding: 20px; border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 2px solid var(--border-color);
+        }
+
+        .modal-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
+        }
+
+        .modal-title { font-size: 1.1rem; font-weight: 800; margin: 0; color: var(--text-primary); }
+        .close-btn {
+            background: #e5e7eb; border: none; width: 30px; height: 30px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: var(--text-primary); cursor: pointer; font-size: 0.9rem; font-weight: 800;
+        }
+        .modal-body p { margin: 8px 0; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
+        .modal-body span { color: var(--text-primary); font-weight: 800; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>115學年度第一學期小班重要日程表</h2>
-    
-    <div class="legend">
-        <div class="legend-item"><div class="color-box" style="background-color: #3498db;"></div>大型活動/座談</div>
-        <div class="legend-item"><div class="color-box" style="background-color: #e67e22;"></div>睡袋清洗</div>
-        <div class="legend-item"><div class="color-box" style="background-color: #9b59b6;"></div>發放餐點表/園地</div>
+<div class="main-container">
+    <header>
+        <h1>新北市私立裕德藝術幼兒園</h1>
+        <p id="subTitle">115學年度第一學期 ｜ 班級：水蜜桃班（小班）</p>
+    </header>
+
+    <div class="filter-bar">
+        <button class="filter-btn active" id="btnSmall" onclick="switchClass('small')">🍎 水蜜桃班（小班）</button>
+        <button class="filter-btn" id="btnBig" onclick="switchClass('big')">📘 中大班行程</button>
+    </div>
+
+    <div class="legend-bar">
+        <div class="legend-tag"><div class="dot" style="background: #1d4ed8;"></div>大型活動</div>
+        <div class="legend-tag"><div class="dot" style="background: #c2410c;"></div>睡袋清洗</div>
+        <div class="legend-tag"><div class="dot" style="background: #6d28d9;"></div>行政通知</div>
+        <div class="legend-tag"><div class="dot" style="background: #047857;"></div>安全週/演練</div>
     </div>
 
     <div id='calendar'></div>
-</div>
 
-<!-- 彈跳視窗 -->
-<div id="eventModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h3 id="modalEventTitle" class="modal-title"></h3>
-        <p><strong>日期：</strong><span id="modalEventDate"></span></p>
-        <p><strong>週次：</strong><span id="modalEventWeek"></span></p>
-        <p><strong>類別：</strong><span id="modalEventType"></span></p>
+    <div class="section-title">👩‍🏫 班級師資陣容</div>
+    <div class="teacher-grid">
+        <div class="teacher-card">
+            <h4>美語</h4>
+            <p><strong>Tiffany</strong></p>
+        </div>
+        <div class="teacher-card">
+            <h4>美術</h4>
+            <p><strong>星星</strong></p>
+        </div>
+        <div class="teacher-card">
+            <h4>音樂</h4>
+            <p><strong>侃欣</strong></p>
+        </div>
+        <div class="teacher-card">
+            <h4>舞蹈</h4>
+            <p><strong>曼依</strong></p>
+        </div>
+        <div class="teacher-card">
+            <h4>體能</h4>
+            <p><strong>波波</strong></p>
+        </div>
+    </div>
+
+    <div class="section-title">📅 水蜜桃班每週固定課表</div>
+    <div class="timetable-container">
+        <table class="timetable">
+            <thead>
+                <tr>
+                    <th>時間</th>
+                    <th>星期一</th>
+                    <th>星期二</th>
+                    <th>星期三</th>
+                    <th>星期四</th>
+                    <th>星期五</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>08:00-09:00</td>
+                    <td colspan="5">幼兒入園 + 早餐時間 + 自由探索</td>
+                </tr>
+                <tr>
+                    <td>09:00-09:30</td>
+                    <td rowspan="2">戶外活動 / 沙坑</td>
+                    <td>數概念</td>
+                    <td rowspan="2">學習區</td>
+                    <td>圖書室</td>
+                    <td rowspan="2">主題活動</td>
+                </tr>
+                <tr>
+                    <td>09:40-10:10</td>
+                    <td>單-故事 / 雙-體能</td>
+                    <td>主題活動</td>
+                </tr>
+                <tr>
+                    <td>10:20-10:50</td>
+                    <td rowspan="2">學習區</td>
+                    <td rowspan="2">主題活動</td>
+                    <td>美語 / 音樂</td>
+                    <td rowspan="2">感覺統合</td>
+                    <td>語文</td>
+                </tr>
+                <tr>
+                    <td>11:00-11:30</td>
+                    <td>美語 / 音樂</td>
+                    <td>生活美語</td>
+                </tr>
+                <tr>
+                    <td>11:30-12:30</td>
+                    <td colspan="5">幼兒午餐時間</td>
+                </tr>
+                <tr>
+                    <td>12:30-14:00</td>
+                    <td colspan="5">幼兒午休時間</td>
+                </tr>
+                <tr>
+                    <td>14:00-14:30</td>
+                    <td rowspan="2">美術</td>
+                    <td rowspan="2">美語 / 語文</td>
+                    <td>單-舞蹈 / 雙-故事</td>
+                    <td>數概念</td>
+                    <td>統整活動</td>
+                </tr>
+                <tr>
+                    <td>14:40-15:10</td>
+                    <td>戶外活動</td>
+                    <td>玩具分享</td>
+                    <td>腳踏車</td>
+                </tr>
+                <tr>
+                    <td>15:20-15:50</td>
+                    <td colspan="5">幼兒點心時間</td>
+                </tr>
+                <tr>
+                    <td>16:00-16:50</td>
+                    <td colspan="5">放學及托育時間</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
-<!-- FullCalendar JS CDN -->
+<div id="eventModal" class="modal">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3 id="modalEventTitle" class="modal-title">事件標題</h3>
+            <button class="close-btn" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <p>活動內容：<span id="modalEventDesc"></span></p>
+            <p>指定日期：<span id="modalEventDate"></span></p>
+            <p>所屬週次：<span id="modalEventWeek"></span></p>
+            <p>活動類別：<span id="modalEventType"></span></p>
+        </div>
+    </div>
+</div>
+
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 <script>
+    var calendar;
+    var currentFilter = 'small';
+
+    var allEvents = [
+        { title: '安全教育週', start: '2026-08-03', end: '2026-08-08', classType: 'small', extendedProps: { week: '第 1 週 (08/03-08/09)', type: '安全教育週' }, className: 'event-safety' },
+        { title: '安全教育與防災宣導週', start: '2026-08-10', end: '2026-08-15', classType: 'small', extendedProps: { week: '第 2 週 (08/10-08/16)', type: '安全教育週' }, className: 'event-safety' },
+        { title: '地震避難掩護演練', start: '2026-09-24', classType: 'small', extendedProps: { week: '第 8 週 (09/21-09/27)', type: '安全演練' }, className: 'event-safety' },
+        { title: '火災避難演練', start: '2026-11-27', classType: 'small', extendedProps: { week: '第 17 週 (11/23-11/29)', type: '安全演練' }, className: 'event-safety' },
+
+        { title: '寄發園地、九月餐點表', start: '2026-09-01', classType: 'small', extendedProps: { week: '第 5 週 (08/31-09/06)', type: '行政發信' }, className: 'event-admin' },
+        { title: '小、幼班家長座談會', start: '2026-09-18', classType: 'small', extendedProps: { week: '第 7 週 (09/14-09/20)', type: '大型活動' }, className: 'event-activity' },
+        { title: '寄發園地、十月餐點表', start: '2026-10-01', classType: 'small', extendedProps: { week: '第 9 週 (09/28-10/04)', type: '行政發信' }, className: 'event-admin' },
+        { title: '幼兒肺結核相關事宜送件', start: '2026-10-02', classType: 'small', extendedProps: { week: '第 9 週 (09/28-10/04)', type: '行政通知' }, className: 'event-admin' },
+        { title: '十月份園務會議', start: '2026-10-05', classType: 'small', extendedProps: { week: '第 10 週 (10/05-10/11)', type: '行政會議' }, className: 'event-admin' },
+        { title: '十一月份園務會議', start: '2026-11-02', classType: 'small', extendedProps: { week: '第 14 週 (11/02-11/08)', type: '行政會議' }, className: 'event-admin' },
+        { title: '寄發園地、十二月餐點表', start: '2026-12-01', classType: 'small', extendedProps: { week: '第 18 週 (11/30-12/06)', type: '行政發信' }, className: 'event-admin' },
+        { title: '十二月份園務會議', start: '2026-12-07', classType: 'small', extendedProps: { week: '第 19 週 (12/07-12/13)', type: '行政會議' }, className: 'event-admin' },
+        { title: '愛心聖誕園遊會', start: '2026-12-18', classType: 'small', extendedProps: { week: '第 20 週 (12/14-12/20)', type: '大型活動' }, className: 'event-activity' },
+        { title: '寄發園地、一月餐點表', start: '2027-01-04', classType: 'small', extendedProps: { week: '第 23 週 (01/04-01/10)', type: '行政發信' }, className: 'event-admin' },
+        { title: '親子運動會', start: '2027-01-16', classType: 'small', extendedProps: { week: '第 24 週 (01/11-01/17)', type: '大型活動' }, className: 'event-activity' },
+
+        { title: 'B棟幼兒睡袋回家清洗', start: '2026-08-14', classType: 'small', extendedProps: { week: '第 2 週 (08/10-08/16)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'B棟幼兒睡袋回家清洗', start: '2026-08-28', classType: 'small', extendedProps: { week: '第 4 週 (08/24-08/30)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'B棟幼兒睡袋回家清洗', start: '2026-09-11', classType: 'small', extendedProps: { week: '第 6 週 (09/07-09/13)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'B棟幼兒睡袋回家清洗', start: '2026-09-24', classType: 'small', extendedProps: { week: '第 8 週 (09/21-09/27)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'B棟幼兒睡袋回家清洗', start: '2026-10-08', classType: 'small', extendedProps: { week: '第 10 週 (10/05-10/11)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'B棟幼兒睡袋回家清洗', start: '2026-11-06', classType: 'small', extendedProps: { week: '第 14 週 (11/02-11/08)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'B棟幼兒睡袋回家清洗', start: '2026-11-20', classType: 'small', extendedProps: { week: '第 16 週 (11/16-11/22)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'B棟幼兒睡袋回家清洗', start: '2026-12-04', classType: 'small', extendedProps: { week: '第 18 週 (11/30-12/06)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'B棟幼兒睡袋回家清洗', start: '2026-12-18', classType: 'small', extendedProps: { week: '第 20 週 (12/14-12/20)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'B棟幼兒睡袋回家清洗', start: '2026-12-31', classType: 'small', extendedProps: { week: '第 22 週 (12/28-01/03)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'B棟幼兒睡袋回家清洗', start: '2027-01-15', classType: 'small', extendedProps: { week: '第 24 週 (01/11-01/17)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'B棟幼兒睡袋回家清洗', start: '2027-01-29', classType: 'small', extendedProps: { week: '第 26 週 (01/25-01/31)', type: '睡袋清洗' }, className: 'event-cleaning' },
+
+        { title: '中、大班家長座談會', start: '2026-09-01', classType: 'big', extendedProps: { week: '第 5 週 (08/31-09/06)', type: '大型活動' }, className: 'event-activity' },
+        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-08-21', classType: 'big', extendedProps: { week: '第 3 週 (08/17-08/23)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-09-04', classType: 'big', extendedProps: { week: '第 5 週 (08/31-09/06)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-09-18', classType: 'big', extendedProps: { week: '第 7 週 (09/14-09/20)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-10-02', classType: 'big', extendedProps: { week: '第 9 週 (09/28-10/04)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-10-16', classType: 'big', extendedProps: { week: '第 11 週 (10/12-10/18)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-10-30', classType: 'big', extendedProps: { week: '第 13 週 (10/26-11/01)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-11-13', classType: 'big', extendedProps: { week: '第 15 週 (11/09-11/15)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-11-27', classType: 'big', extendedProps: { week: '第 17 週 (11/23-11/29)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-12-11', classType: 'big', extendedProps: { week: '第 19 週 (12/07-12/13)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-12-24', classType: 'big', extendedProps: { week: '第 21 週 (12/21-12/27)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'A、C棟幼兒睡袋回家清洗', start: '2027-01-08', classType: 'big', extendedProps: { week: '第 23 週 (01/04-01/10)', type: '睡袋清洗' }, className: 'event-cleaning' },
+        { title: 'A、C棟幼兒睡袋回家清洗', start: '2027-01-22', classType: 'big', extendedProps: { week: '第 25 週 (01/18-01/24)', type: '睡袋清洗' }, className: 'event-cleaning' }
+    ];
+
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
-        var modal = document.getElementById('eventModal');
-        var span = document.getElementsByClassName("close")[0];
 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
+        calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
-            initialDate: '2026-09-01', // 預設顯示 2026 年 9 月
+            initialDate: '2026-08-01',
             headerToolbar: {
-                left: 'prev,next today',
+                left: 'prev,next',
                 center: 'title',
-                right: 'dayGridMonth,timeGridWeek'
+                right: 'today'
             },
+            height: 'auto',
             locale: 'zh-tw',
-            events: [
-                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-08-14', extendedProps: { week: '第 2 週', type: '睡袋清洗' }, className: 'event-cleaning' },
-                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-08-28', extendedProps: { week: '第 4 週', type: '睡袋清洗' }, className: 'event-cleaning' },
-                { title: '寄發裕德園地、九月份餐點表', start: '2026-09-01', extendedProps: { week: '第 5 週', type: '行政/發信' }, className: 'event-admin' },
-                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-09-11', extendedProps: { week: '第 6 週', type: '睡袋清洗' }, className: 'event-cleaning' },
-                { title: '小、幼班家長座談會', start: '2026-09-18', extendedProps: { week: '第 7 週', type: '家長參與' }, className: 'event-activity' },
-                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-09-24', extendedProps: { week: '第 8 週', type: '睡袋清洗' }, className: 'event-cleaning' },
-                { title: '寄發裕德園地、十月份餐點表', start: '2026-10-01', extendedProps: { week: '第 9 週', type: '行政/發信' }, className: 'event-admin' },
-                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-10-08', extendedProps: { week: '第 10 週', type: '睡袋清洗' }, className: 'event-cleaning' },
-                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-10-22', extendedProps: { week: '第 11/12 週', type: '睡袋清洗' }, className: 'event-cleaning' },
-                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-11-06', extendedProps: { week: '第 14 週', type: '睡袋清洗' }, className: 'event-cleaning' },
-                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-11-20', extendedProps: { week: '第 16 週', type: '睡袋清洗' }, className: 'event-cleaning' },
-                { title: '寄發裕德園地、十二月份餐點表', start: '2026-12-01', extendedProps: { week: '第 18 週', type: '行政/發信' }, className: 'event-admin' },
-                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-12-03', extendedProps: { week: '第 18 週', type: '睡袋清洗' }, className: 'event-cleaning' },
-                { title: '愛心聖誕園遊會', start: '2026-12-18', extendedProps: { week: '第 20 週', type: '大型活動' }, className: 'event-activity' },
-                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-12-18', extendedProps: { week: '第 20 週', type: '睡袋清洗' }, className: 'event-cleaning' },
-                { title: 'B棟幼兒睡袋帶回清洗', start: '2026-12-31', extendedProps: { week: '第 22 週', type: '睡袋清洗' }, className: 'event-cleaning' },
-                { title: '寄發裕德園地、一月份餐點表', start: '2027-01-04', extendedProps: { week: '第 23 週', type: '行政/發信' }, className: 'event-admin' },
-                { title: 'B棟幼兒睡袋帶回清洗', start: '2027-01-15', extendedProps: { week: '第 24 週', type: '睡袋清洗' }, className: 'event-cleaning' },
-                { title: '親子運動會', start: '2027-01-16', extendedProps: { week: '第 24 週', type: '大型活動' }, className: 'event-activity' }
-            ],
+            events: getFilteredEvents('small'),
             eventClick: function(info) {
                 var eventObj = info.event;
                 document.getElementById('modalEventTitle').innerText = eventObj.title;
+                document.getElementById('modalEventDesc').innerText = eventObj.title;
                 document.getElementById('modalEventDate').innerText = eventObj.startStr;
                 document.getElementById('modalEventWeek').innerText = eventObj.extendedProps.week;
                 document.getElementById('modalEventType').innerText = eventObj.extendedProps.type;
-                modal.style.display = "block";
+                document.getElementById('eventModal').style.display = "flex";
             }
         });
 
         calendar.render();
+    });
 
-        // 關閉彈跳視窗
-        span.onclick = function() {
+    function getFilteredEvents(type) {
+        return allEvents.filter(function(ev) {
+            if (type === 'small') {
+                return ev.classType === 'small';
+            } else {
+                return ev.classType === 'big' || ev.classType === 'small';
+            }
+        });
+    }
+
+    function switchClass(type) {
+        currentFilter = type;
+        var btnSmall = document.getElementById('btnSmall');
+        var btnBig = document.getElementById('btnBig');
+        var subTitle = document.getElementById('subTitle');
+
+        if (type === 'small') {
+            btnSmall.classList.add('active');
+            btnBig.classList.remove('active');
+            subTitle.innerText = "115學年度第一學期 ｜ 班級：水蜜桃班（小班）";
+        } else {
+            btnBig.classList.add('active');
+            btnSmall.classList.remove('active');
+            subTitle.innerText = "115學年度第一學期 ｜ 班級：中大班行程";
+        }
+
+        calendar.removeAllEvents();
+        calendar.addEventSource(getFilteredEvents(type));
+    }
+
+    function closeModal() {
+        document.getElementById('eventModal').style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        var modal = document.getElementById('eventModal');
+        if (event.target == modal) {
             modal.style.display = "none";
         }
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    });
+    }
 </script>
 
 </body>
