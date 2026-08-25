@@ -60,7 +60,7 @@
             border-radius: 20px;
         }
 
-        /* ✨ 蘋果風活動預告卡片（置頂提醒） */
+        /* 蘋果風活動預告卡片 */
         .upcoming-widget {
             background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
             border: 1px solid #bfdbfe;
@@ -283,6 +283,55 @@
             white-space: nowrap;
         }
 
+        /* ✨ 餐點專區卡片區塊 (移至最下方) */
+        .menu-section-card {
+            background: #fdf8f6;
+            border: 1px solid #fecaca;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+        }
+
+        .menu-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .menu-section-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #c2410c;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin: 0;
+        }
+
+        .menu-select {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid #f87171;
+            background: #ffffff;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .menu-viewer-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #f87171;
+            background: #ffffff;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -324,15 +373,13 @@
         <p id="subTitle">115學年度第一學期 ｜ 班級：水蜜桃班（小班）</p>
     </header>
 
-    <!-- ✨ 增設：動態大型活動預告面板 -->
+    <!-- 近期活動預告面板 -->
     <div class="upcoming-widget">
         <div class="upcoming-header">
             <span>📢</span>
             <span id="upcomingTitle">近期大型活動預告</span>
         </div>
-        <div class="upcoming-list" id="upcomingList">
-            <!-- 動態填入 -->
-        </div>
+        <div class="upcoming-list" id="upcomingList"></div>
     </div>
 
     <div class="filter-bar">
@@ -351,26 +398,11 @@
 
     <div class="section-title">👩‍🏫 班級師資陣容</div>
     <div class="teacher-grid">
-        <div class="teacher-card">
-            <h4>美語</h4>
-            <p><strong>Tiffany</strong></p>
-        </div>
-        <div class="teacher-card">
-            <h4>美術</h4>
-            <p><strong>星星</strong></p>
-        </div>
-        <div class="teacher-card">
-            <h4>音樂</h4>
-            <p><strong>侃欣</strong></p>
-        </div>
-        <div class="teacher-card">
-            <h4>舞蹈</h4>
-            <p><strong>曼依</strong></p>
-        </div>
-        <div class="teacher-card">
-            <h4>體能</h4>
-            <p><strong>波波</strong></p>
-        </div>
+        <div class="teacher-card"><h4>美語</h4><p><strong>Tiffany</strong></p></div>
+        <div class="teacher-card"><h4>美術</h4><p><strong>星星</strong></p></div>
+        <div class="teacher-card"><h4>音樂</h4><p><strong>侃欣</strong></p></div>
+        <div class="teacher-card"><h4>舞蹈</h4><p><strong>曼依</strong></p></div>
+        <div class="teacher-card"><h4>體能</h4><p><strong>波波</strong></p></div>
     </div>
 
     <div class="section-title">📅 水蜜桃班每週固定課表</div>
@@ -387,68 +419,32 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>08:00-09:00</td>
-                    <td colspan="5">幼兒入園 + 早餐時間 + 自由探索</td>
-                </tr>
-                <tr>
-                    <td>09:00-09:30</td>
-                    <td rowspan="2">戶外活動 / 沙坑</td>
-                    <td>數概念</td>
-                    <td rowspan="2">學習區</td>
-                    <td>圖書室</td>
-                    <td rowspan="2">主題活動</td>
-                </tr>
-                <tr>
-                    <td>09:40-10:10</td>
-                    <td>單-故事 / 雙-體能</td>
-                    <td>主題活動</td>
-                </tr>
-                <tr>
-                    <td>10:20-10:50</td>
-                    <td rowspan="2">學習區</td>
-                    <td rowspan="2">主題活動</td>
-                    <td>美語 / 音樂</td>
-                    <td rowspan="2">感覺統合</td>
-                    <td>語文</td>
-                </tr>
-                <tr>
-                    <td>11:00-11:30</td>
-                    <td>美語 / 音樂</td>
-                    <td>生活美語</td>
-                </tr>
-                <tr>
-                    <td>11:30-12:30</td>
-                    <td colspan="5">幼兒午餐時間</td>
-                </tr>
-                <tr>
-                    <td>12:30-14:00</td>
-                    <td colspan="5">幼兒午休時間</td>
-                </tr>
-                <tr>
-                    <td>14:00-14:30</td>
-                    <td rowspan="2">美術</td>
-                    <td rowspan="2">美語 / 語文</td>
-                    <td>單-舞蹈 / 雙-故事</td>
-                    <td>數概念</td>
-                    <td>統整活動</td>
-                </tr>
-                <tr>
-                    <td>14:40-15:10</td>
-                    <td>戶外活動</td>
-                    <td>玩具分享</td>
-                    <td>腳踏車</td>
-                </tr>
-                <tr>
-                    <td>15:20-15:50</td>
-                    <td colspan="5">幼兒點心時間</td>
-                </tr>
-                <tr>
-                    <td>16:00-16:50</td>
-                    <td colspan="5">放學及托育時間</td>
-                </tr>
+                <tr><td>08:00-09:00</td><td colspan="5">幼兒入園 + 早餐時間 + 自由探索</td></tr>
+                <tr><td>09:00-09:30</td><td rowspan="2">戶外活動 / 沙坑</td><td>數概念</td><td rowspan="2">學習區</td><td>圖書室</td><td rowspan="2">主題活動</td></tr>
+                <tr><td>09:40-10:10</td><td>單-故事 / 雙-體能</td><td>主題活動</td></tr>
+                <tr><td>10:20-10:50</td><td rowspan="2">學習區</td><td rowspan="2">主題活動</td><td>美語 / 音樂</td><td rowspan="2">感覺統合</td><td>語文</td></tr>
+                <tr><td>11:00-11:30</td><td>美語 / 音樂</td><td>生活美語</td></tr>
+                <tr><td>11:30-12:30</td><td colspan="5">幼兒午餐時間</td></tr>
+                <tr><td>12:30-14:00</td><td colspan="5">幼兒午休時間</td></tr>
+                <tr><td>14:00-14:30</td><td rowspan="2">美術</td><td rowspan="2">美語 / 語文</td><td>單-舞蹈 / 雙-故事</td><td>數概念</td><td>統整活動</td></tr>
+                <tr><td>14:40-15:10</td><td>戶外活動</td><td>玩具分享</td><td>腳踏車</td></tr>
+                <tr><td>15:20-15:50</td><td colspan="5">幼兒點心時間</td></tr>
+                <tr><td>16:00-16:50</td><td colspan="5">放學及托育時間</td></tr>
             </tbody>
         </table>
+    </div>
+
+    <!-- ✨ 每月營養餐點專區 (移至最下方，具備防呆機制：只有有上傳的月份才會顯示) -->
+    <div class="menu-section-card">
+        <div class="menu-section-header">
+            <h3 class="menu-section-title"><span>🍽️</span> 每月幼兒營養餐點表</h3>
+            <select id="menuMonthSelect" class="menu-select" onchange="changeMenuPdf()">
+                <!-- JS 會自動根據 availableMenus 填入選項 -->
+            </select>
+        </div>
+        <div class="menu-viewer-container">
+            <iframe id="menuIframe" src="" width="100%" height="100%" style="border:none;"></iframe>
+        </div>
     </div>
 </div>
 
@@ -472,55 +468,31 @@
     var calendar;
     var currentFilter = 'small';
 
+    // ✨ 餐點檔案白名單：未來只要新增下個月的 PDF，就在這裡多加一行即可！
+    // 格式：代號 : "顯示名稱"
+    var availableMenus = {
+        "11508": "115學年度 8月份餐點表"
+        // 如果 9 月還沒好，就先不要加 "11509"；等 9 月做好上傳後，只要在這邊解除註解或加上去即可：
+        // , "11509": "115學年度 9月份餐點表"
+    };
+
     var allEvents = [
         { title: '安全教育週', start: '2026-08-03', end: '2026-08-08', classType: 'small', extendedProps: { week: '第 1 週 (08/03-08/09)', type: '安全教育週' }, className: 'event-safety' },
         { title: '安全教育與防災宣導週', start: '2026-08-10', end: '2026-08-15', classType: 'small', extendedProps: { week: '第 2 週 (08/10-08/16)', type: '安全教育週' }, className: 'event-safety' },
         { title: '地震避難掩護演練', start: '2026-09-24', classType: 'small', extendedProps: { week: '第 8 週 (09/21-09/27)', type: '安全演練' }, className: 'event-safety' },
         { title: '火災避難演練', start: '2026-11-27', classType: 'small', extendedProps: { week: '第 17 週 (11/23-11/29)', type: '安全演練' }, className: 'event-safety' },
-
         { title: '寄發園地、九月餐點表', start: '2026-09-01', classType: 'small', extendedProps: { week: '第 5 週 (08/31-09/06)', type: '行政發信' }, className: 'event-admin' },
         { title: '小、幼班家長座談會', start: '2026-09-18', classType: 'small', extendedProps: { week: '第 7 週 (09/14-09/20)', type: '大型活動' }, className: 'event-activity' },
         { title: '寄發園地、十月餐點表', start: '2026-10-01', classType: 'small', extendedProps: { week: '第 9 週 (09/28-10/04)', type: '行政發信' }, className: 'event-admin' },
-        { title: '幼兒肺結核相關事宜送件', start: '2026-10-02', classType: 'small', extendedProps: { week: '第 9 週 (09/28-10/04)', type: '行政通知' }, className: 'event-admin' },
-        { title: '十月份園務會議', start: '2026-10-05', classType: 'small', extendedProps: { week: '第 10 週 (10/05-10/11)', type: '行政會議' }, className: 'event-admin' },
-        { title: '十一月份園務會議', start: '2026-11-02', classType: 'small', extendedProps: { week: '第 14 週 (11/02-11/08)', type: '行政會議' }, className: 'event-admin' },
-        { title: '寄發園地、十二月餐點表', start: '2026-12-01', classType: 'small', extendedProps: { week: '第 18 週 (11/30-12/06)', type: '行政發信' }, className: 'event-admin' },
-        { title: '十二月份園務會議', start: '2026-12-07', classType: 'small', extendedProps: { week: '第 19 週 (12/07-12/13)', type: '行政會議' }, className: 'event-admin' },
         { title: '愛心聖誕園遊會', start: '2026-12-18', classType: 'small', extendedProps: { week: '第 20 週 (12/14-12/20)', type: '大型活動' }, className: 'event-activity' },
-        { title: '寄發園地、一月餐點表', start: '2027-01-04', classType: 'small', extendedProps: { week: '第 23 週 (01/04-01/10)', type: '行政發信' }, className: 'event-admin' },
-        { title: '親子運動會', start: '2027-01-16', classType: 'small', extendedProps: { week: '第 24 週 (01/11-01/17)', type: '大型活動' }, className: 'event-activity' },
-
-        { title: 'B棟幼兒睡袋回家清洗', start: '2026-08-14', classType: 'small', extendedProps: { week: '第 2 週 (08/10-08/16)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'B棟幼兒睡袋回家清洗', start: '2026-08-28', classType: 'small', extendedProps: { week: '第 4 週 (08/24-08/30)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'B棟幼兒睡袋回家清洗', start: '2026-09-11', classType: 'small', extendedProps: { week: '第 6 週 (09/07-09/13)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'B棟幼兒睡袋回家清洗', start: '2026-09-24', classType: 'small', extendedProps: { week: '第 8 週 (09/21-09/27)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'B棟幼兒睡袋回家清洗', start: '2026-10-08', classType: 'small', extendedProps: { week: '第 10 週 (10/05-10/11)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'B棟幼兒睡袋回家清洗', start: '2026-11-06', classType: 'small', extendedProps: { week: '第 14 週 (11/02-11/08)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'B棟幼兒睡袋回家清洗', start: '2026-11-20', classType: 'small', extendedProps: { week: '第 16 週 (11/16-11/22)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'B棟幼兒睡袋回家清洗', start: '2026-12-04', classType: 'small', extendedProps: { week: '第 18 週 (11/30-12/06)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'B棟幼兒睡袋回家清洗', start: '2026-12-18', classType: 'small', extendedProps: { week: '第 20 週 (12/14-12/20)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'B棟幼兒睡袋回家清洗', start: '2026-12-31', classType: 'small', extendedProps: { week: '第 22 週 (12/28-01/03)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'B棟幼兒睡袋回家清洗', start: '2027-01-15', classType: 'small', extendedProps: { week: '第 24 週 (01/11-01/17)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'B棟幼兒睡袋回家清洗', start: '2027-01-29', classType: 'small', extendedProps: { week: '第 26 週 (01/25-01/31)', type: '睡袋清洗' }, className: 'event-cleaning' },
-
-        { title: '中、大班家長座談會', start: '2026-09-01', classType: 'big', extendedProps: { week: '第 5 週 (08/31-09/06)', type: '大型活動' }, className: 'event-activity' },
-        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-08-21', classType: 'big', extendedProps: { week: '第 3 週 (08/17-08/23)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-09-04', classType: 'big', extendedProps: { week: '第 5 週 (08/31-09/06)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-09-18', classType: 'big', extendedProps: { week: '第 7 週 (09/14-09/20)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-10-02', classType: 'big', extendedProps: { week: '第 9 週 (09/28-10/04)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-10-16', classType: 'big', extendedProps: { week: '第 11 週 (10/12-10/18)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-10-30', classType: 'big', extendedProps: { week: '第 13 週 (10/26-11/01)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-11-13', classType: 'big', extendedProps: { week: '第 15 週 (11/09-11/15)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-11-27', classType: 'big', extendedProps: { week: '第 17 週 (11/23-11/29)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-12-11', classType: 'big', extendedProps: { week: '第 19 週 (12/07-12/13)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'A、C棟幼兒睡袋回家清洗', start: '2026-12-24', classType: 'big', extendedProps: { week: '第 21 週 (12/21-12/27)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'A、C棟幼兒睡袋回家清洗', start: '2027-01-08', classType: 'big', extendedProps: { week: '第 23 週 (01/04-01/10)', type: '睡袋清洗' }, className: 'event-cleaning' },
-        { title: 'A、C棟幼兒睡袋回家清洗', start: '2027-01-22', classType: 'big', extendedProps: { week: '第 25 週 (01/18-01/24)', type: '睡袋清洗' }, className: 'event-cleaning' }
+        { title: '親子運動會', start: '2027-01-16', classType: 'small', extendedProps: { week: '第 24 週 (01/11-01/17)', type: '大型活動' }, className: 'event-activity' }
     ];
 
     document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
+        // 初始化下拉選單（自動過濾未上傳的月份）
+        initMenuDropdown();
 
+        var calendarEl = document.getElementById('calendar');
         calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             initialDate: '2026-08-01',
@@ -532,12 +504,28 @@
             height: 'auto',
             locale: 'zh-tw',
             events: getFilteredEvents('small'),
-            // 當日曆切換月份時，自動更新右上角的預告活動！
             datesSet: function(info) {
                 updateUpcomingWidget(info.view.currentStart);
             },
             eventClick: function(info) {
                 var eventObj = info.event;
+                if (eventObj.title.includes('餐點表')) {
+                    var targetVal = '11508';
+                    if (eventObj.title.includes('九月')) targetVal = '11509';
+                    else if (eventObj.title.includes('十月')) targetVal = '11510';
+                    
+                    var selectElem = document.getElementById('menuMonthSelect');
+                    // 檢查該月份選單是否存在（有沒有上傳檔案）
+                    if ([...selectElem.options].some(opt => opt.value === targetVal)) {
+                        selectElem.value = targetVal;
+                        changeMenuPdf();
+                        document.querySelector('.menu-section-card').scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        alert("該月份的餐點表 PDF 尚未上傳，敬請期待！");
+                    }
+                    return;
+                }
+
                 document.getElementById('modalEventTitle').innerText = eventObj.title;
                 document.getElementById('modalEventDesc').innerText = eventObj.title;
                 document.getElementById('modalEventDate').innerText = eventObj.startStr;
@@ -546,52 +534,56 @@
                 document.getElementById('eventModal').style.display = "flex";
             }
         });
-
         calendar.render();
     });
 
-    // ✨ 核心邏輯：計算當月與下個月的大型活動
+    // ✨ 動態生成下拉選單（自動排除未啟用的月份）
+    function initMenuDropdown() {
+        var selectElem = document.getElementById('menuMonthSelect');
+        selectElem.innerHTML = "";
+        
+        for (var key in availableMenus) {
+            var opt = document.createElement('option');
+            opt.value = key;
+            opt.innerText = availableMenus[key];
+            selectElem.appendChild(opt);
+        }
+        
+        // 預設載入第一個可用月份
+        changeMenuPdf();
+    }
+
+    // ✨ 切換 PDF 檔案連結
+    function changeMenuPdf() {
+        var selectedVal = document.getElementById('menuMonthSelect').value;
+        if (!selectedVal) return;
+        var pdfUrl = `https://jayson2022.github.io/Kindergarten-Academic-Calendar/assets/pdfs/${selectedVal}%E5%B9%BC%E5%85%92%E5%9C%92%E9%A4%90%E9%BB%9E%E8%A1%A8.pdf`;
+        document.getElementById('menuIframe').src = pdfUrl;
+    }
+
     function updateUpcomingWidget(currentDate) {
         var year = currentDate.getFullYear();
-        var month = currentDate.getMonth(); // 0-11
+        var month = currentDate.getMonth();
 
-        // 目標月份：當月與下個月
         var targetEvents = allEvents.filter(function(ev) {
-            // 必須符合目前選取的班級過濾條件
-            var matchesClass = (currentFilter === 'small') ? (ev.classType === 'small') : true;
-            if (!matchesClass) return false;
-
-            // 必須是大型活動 (className 為 event-activity)
             if (ev.className !== 'event-activity') return false;
-
             var evDate = new Date(ev.start);
-            var evYear = evDate.getFullYear();
-            var evMonth = evDate.getMonth();
-
-            // 判斷是否為「當月」或「下個月」
-            var isCurrentMonth = (evYear === year && evMonth === month);
+            var isCurrentMonth = (evDate.getFullYear() === year && evDate.getMonth() === month);
             var nextMonth = (month + 1) % 12;
             var nextYear = (month === 11) ? year + 1 : year;
-            var isNextMonth = (evYear === nextYear && evMonth === nextMonth);
-
+            var isNextMonth = (evDate.getFullYear() === nextYear && evDate.getMonth() === nextMonth);
             return isCurrentMonth || isNextMonth;
         });
 
-        // 依照日期排序
-        targetEvents.sort(function(a, b) {
-            return new Date(a.start) - new Date(b.start);
-        });
+        targetEvents.sort(function(a, b) { return new Date(a.start) - new Date(b.start); });
 
         var listContainer = document.getElementById('upcomingList');
         var titleContainer = document.getElementById('upcomingTitle');
-        
-        // 顯示文字標題（例如：8-9月大型活動預告）
         var mNames = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
         var nextMIndex = (month + 1) % 12;
         titleContainer.innerText = mNames[month] + " ＆ " + mNames[nextMIndex] + " 近期大型活動預告";
 
         listContainer.innerHTML = "";
-
         if (targetEvents.length === 0) {
             listContainer.innerHTML = '<div class="upcoming-item" style="justify-content: center; color: #6b7280;">近期無大型活動安排</div>';
             return;
@@ -599,8 +591,7 @@
 
         targetEvents.forEach(function(ev) {
             var parts = ev.start.split('-');
-            var dateStr = parts[1] + '/' + parts[2]; // 格式 MM/DD
-            
+            var dateStr = parts[1] + '/' + parts[2];
             var item = document.createElement('div');
             item.className = 'upcoming-item';
             item.innerHTML = '<span>' + ev.title + '</span><span class="upcoming-date">' + dateStr + '</span>';
@@ -610,11 +601,7 @@
 
     function getFilteredEvents(type) {
         return allEvents.filter(function(ev) {
-            if (type === 'small') {
-                return ev.classType === 'small';
-            } else {
-                return ev.classType === 'big' || ev.classType === 'small';
-            }
+            return (type === 'small') ? (ev.classType === 'small') : true;
         });
     }
 
@@ -636,8 +623,6 @@
 
         calendar.removeAllEvents();
         calendar.addEventSource(getFilteredEvents(type));
-        
-        // 切換班級時同步更新預告面板
         updateUpcomingWidget(calendar.getDate());
     }
 
@@ -647,9 +632,7 @@
 
     window.onclick = function(event) {
         var modal = document.getElementById('eventModal');
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
+        if (event.target == modal) modal.style.display = "none";
     }
 </script>
 
